@@ -1,18 +1,14 @@
-import { useState } from 'react';
-import { json } from 'stream/consumers';
-import { ProductCard, ProductImage, ProductTitle, ProductButtons } from '../components';
-import { Product } from '../interfaces/interfaces';
-import '../styles/custom-styles.css';
-import { products } from '../data/productsData';
 import { useShoppingCart } from '../hooks/useShoppingCart';
+import { ProductCard, ProductImage, ProductTitle, ProductButtons } from '../components';
+import { products } from '../data/productsData';
+
+import '../styles/custom-styles.css';
 
 export const ShoppingPage = () => {
   const {
     shoppingCart,
     onProductCountChange,
   } = useShoppingCart();
-
-  
 
   return (
     <div>
