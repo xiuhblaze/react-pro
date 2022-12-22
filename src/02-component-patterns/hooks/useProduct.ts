@@ -1,32 +1,47 @@
-import { useState, useEffect, useRef } from 'react';
-import { onChangeArgs, Product } from '../interfaces/interfaces';
+import { useState, useEffect } from 'react';
+import { onChangeArgs, Product, InitialValues } from '../interfaces/interfaces';
 
 interface  useProductArgs {
   product: Product;
   onChange?: (args: onChangeArgs) => void;
   value?: number;
+  initialValues?: InitialValues;
 }
 
-export const useProduct = ({product, onChange, value = 0}: useProductArgs) => {
-  const [counter, setCounter] = useState(value);
+export const useProduct = ({ product, onChange, value = 0, initialValues }: useProductArgs) => {
+  const [counter, setCounter] = useState<number>(initialValues?.count || value);
 
-  // const isControlled = useRef(!!onChange);
+  //const isMounted = useRef(false);
+
+  // useEffect(() => {
+  //   isMounted.current = true;
+  // }, []);
 
   useEffect(() => {
-    setCounter(value);
+    //if (!isMounted.current) return;
+    setCounter(initialValues?.count || value);
   }, [value]);
 
   const increaseBy = (value: number) => {
-
-    // if (isControlled.current) {
-    //   return onChange!({ count: value, product }); // el signo de admiración es para que no emita alerta por considerar que puede venir un undefine
-    // }
-    const newValue = Math.max(counter + value, 0);
+    let newValue = Math.max(counter + value, 0);
+    
+    newValue = initialValues?.maxCount ? Math.min(newValue, initialValues?.maxCount) : newValue;
     setCounter(newValue);
     onChange && onChange({ product, count: newValue }); // Si la definición de onChange es null | undefined, no se ejecuta
   };
 
-  return { counter, increaseBy };
+  const reset = () => {
+    setCounter(initialValues?.count || value);
+  };
+
+  return { 
+    counter,
+    isMaxCountReached: !!initialValues?.count && initialValues.maxCount === counter,
+    maxCount: initialValues?.maxCount,
+    
+    increaseBy,
+    reset,
+  };
 }
 
 export default useProduct;
