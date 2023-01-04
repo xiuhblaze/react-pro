@@ -1,0 +1,82 @@
+[
+  {
+    "type": "text",
+    "name": "firstName",
+    "placeholder": "Escribe el nombre",
+    "label": "First name",
+    "value": "",
+    "validations": [
+      {
+        "type": "required",
+        "message": "Es necesario el nombre del usuario"
+      },
+      {
+        "type": "min",
+        "value": 2,
+        "message": "El nombre no puede ser menor a 2 caracteres"
+      }
+    ]
+  },
+  {
+    "type": "text",
+    "name": "lastName",
+    "placeholder": "Escribe el apellido",
+    "label": "Last name",
+    "value": "",
+    "validations": [
+      {
+        "type": "required"
+      }
+    ]
+  },
+  {
+    "type": "email",
+    "name": "email",
+    "placeholder": "Escribe un email",
+    "label": "Email",
+    "value": "",
+    "validations": [
+      {
+        "type": "required",
+        "message": "Es necesario una dirección de correo electrónico"
+      },
+      {
+        "type": "email",
+        "message": "No es una dirección de correo electrónico valida"
+      }
+    ]
+  },
+  {
+    "type": "select",
+    "name": "favoriteGame",
+    "label": "Favorite Game",
+    "value": "",
+    "options": [
+      {
+        "id": 1,
+        "label": "Halo"
+      },
+      {
+        "id": 2,
+        "label": "Townscape"
+      },
+      {
+        "id": 3,
+        "label": "Crysis"
+      },
+      {
+        "id": 4,
+        "label": "Super Metroid"
+      },
+      {
+        "id": 5,
+        "label": "The Leyend of Zelda"
+      }
+    ],
+    "validations": [
+      {
+        "type": "required"
+      }
+    ]
+  }
+]
